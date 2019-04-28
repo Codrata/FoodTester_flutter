@@ -1,56 +1,22 @@
 import 'package:flutter/material.dart';
 import './products.dart';
-import './product_controller.dart';
 
-class ProductManager extends StatefulWidget {
-  final String startingProduct;
+class ProductManager extends StatelessWidget {
 
-  ProductManager({this.startingProduct}) {
-    print("[ProductManager Widget] Constructor");
-  }
+  final List<Map<String, dynamic>> products;
 
-  @override
-  State<StatefulWidget> createState() {
-    print("[ProductManager Widget] createState");
-    return _ProductManagerState();
-  }
-}
+  ProductManager(this.products);
 
-class _ProductManagerState extends State<ProductManager> {
-  List<String> _products = [];
-
-  @override
-  void initState() {
-    print("[ProductManager Widget] initState");
-    if (widget.startingProduct != null) {
-      _products.add(widget.startingProduct);
-    }
-
-    super.initState();
-  }
-
-  @override
-  void didUpdateWidget(ProductManager oldWidget) {
-    print("[ProductManager Widget] didUpdate");
-    super.didUpdateWidget(oldWidget);
-  }
-
-  void _addProducts(String product) {
-    setState(() {
-      _products.add(product);
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
     print("[ProductManager Widget] Build");
     return Column(
       children: [
-        Container(
-          margin: EdgeInsets.all(10.0),
-          child: ProductController(_addProducts),
-        ),
-        Expanded(child: Products(_products))
+        Expanded(
+            child: Products(
+          products
+        ))
       ],
     );
   }
